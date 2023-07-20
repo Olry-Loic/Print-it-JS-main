@@ -96,10 +96,3 @@ dotsDiv.innerHTML = dotHTML;
 
 // appel initial pour mettre en surbrillance le premier bullet point
 updateActiveDotIndex();
-
-
-
-
-
-
-
