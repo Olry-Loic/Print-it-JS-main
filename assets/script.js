@@ -40,7 +40,7 @@ let currentIndex = 0;
 
 //rendre la fleche de gauche cliquable
 arrowLeft.addEventListener("click", function () {
-	// mise a jour de la variable currentIndex on evite le bloquage avec l'operateur modulo 
+	// mise a jour de la variable currentIndex on evite le bloquage  
   currentIndex = currentIndex - 1;
   if (currentIndex < 0) {
     currentIndex = slides.length - 1;
@@ -52,7 +52,7 @@ arrowLeft.addEventListener("click", function () {
 
 //rendre la fleche de gauche cliquable
 arrowRight.addEventListener("click", function () {
-	// mise a jour de la variable currentIndex on evite le bloquage avec l'operateur modulo 
+	// mise a jour de la variable currentIndex on evite le bloquage
   currentIndex = currentIndex + 1;
   if (currentIndex >= slides.length) {
     currentIndex = 0;
@@ -76,12 +76,6 @@ function updateParagraphText() {
 function updateActiveDotIndex() {
 	for (let i = 0; i < dots.length; i++) {
 	  dots[i].classList.remove('dot_selected');
-	  dots[i].addEventListener("click", function () {
-		  currentIndex = i;
-		  updateBannerImage();
-		  updateParagraphText();
-		  updateActiveDotIndex();
-		});
 	}
 	dots[currentIndex].classList.add('dot_selected');
   }
@@ -96,3 +90,13 @@ dotsDiv.innerHTML = dotHTML;
 
 // appel initial pour mettre en surbrillance le premier bullet point
 updateActiveDotIndex();
+
+// Ajouter un écouteur d'événement à chaque bullet point
+for (let i = 0; i < dots.length; i++) {
+	dots[i].addEventListener("click", function () {
+	  currentIndex = i;
+	  updateBannerImage();
+	  updateParagraphText();
+	  updateActiveDotIndex();
+	});
+  }
