@@ -21,22 +21,12 @@ const slides = [
 	}
 ]
 
+// Index de l'image actuellement affichée
+let currentIndex = 0; 
 
 //sélectionner l'élément HTML correspondant
 const arrowLeft = document.getElementById("arrow_left");
 const arrowRight = document.getElementById("arrow_right");
-const bannerImg = document.querySelector('.banner-img');
-const paragraph = document.querySelector('p');
-
-//creation des bullet point
-let dotsDiv = document.querySelector('.dots');
-let dotHTML = '';
-
-// sélectionner tous les éléments de classe "dot"
-let dots = document.getElementsByClassName('dot');
-
-// Index de l'image actuellement affichée
-let currentIndex = 0; 
 
 //rendre la fleche de gauche cliquable
 arrowLeft.addEventListener("click", function () {
@@ -62,15 +52,35 @@ arrowRight.addEventListener("click", function () {
   updateActiveDotIndex();
 });
 
+//sélectionner l'élément HTML correspondant 
+const bannerImg = document.querySelector('.banner-img');
 // mise a jour du lien de l'image 
 function updateBannerImage() {
 	bannerImg.src = "./assets/images/slideshow/" + slides[currentIndex].image;
   }
+
+//sélectionner l'élément HTML correspondant
+const paragraph = document.querySelector('p');
 //mise à jour du text 
 function updateParagraphText() {
 	let currentSlide = slides[currentIndex];
 	paragraph.innerHTML = currentSlide.tagLine;
 }
+
+//creation des bullet point
+let dotsDiv = document.querySelector('.dots');
+let dotHTML = '';
+
+//création du nombres de bullet point présent sur le carousel qui représente le mombre d'image présent dans le tableau
+for (let i = 0; i < slides.length; i++) {
+	dotHTML += '<div class="dot"></div>';
+  }
+  
+//inserer les balise DIV dans le html
+dotsDiv.innerHTML = dotHTML;
+
+// sélectionner tous les éléments de classe "dot"
+let dots = document.getElementsByClassName('dot');
 
 // fonction pour mettre à jour la classe "dot_selected"
 function updateActiveDotIndex() {
@@ -79,14 +89,6 @@ function updateActiveDotIndex() {
 	}
 	dots[currentIndex].classList.add('dot_selected');
   }
-
-//création du nombres de bullet point présent sur le carousel qui représente le mombre d'image présent dans le tableau
-for (let i = 0; i < slides.length; i++) {
-  dotHTML += '<div class="dot"></div>';
-}
-
-//inserer les balise DIV dans le html
-dotsDiv.innerHTML = dotHTML;
 
 // appel initial pour mettre en surbrillance le premier bullet point
 updateActiveDotIndex();
